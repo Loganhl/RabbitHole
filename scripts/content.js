@@ -21,7 +21,7 @@ function setupContextMenu() {
       const highlightedText = data.selectionText;
 
         // Send the highlighted text to your Flask server
-        fetch('http://localhost:5000/highlight', {
+        fetch('http://127.0.0.1:5000/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
