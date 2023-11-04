@@ -6,7 +6,6 @@ function setupContextMenu() {
   });
 }
 
-<<<<<<< HEAD
 chrome.runtime.onInstalled.addListener(() => {
   setupContextMenu();
 });
@@ -26,13 +25,3 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
     chrome.sidePanel.open({ tabId: tab.id });
   }
 });
-=======
-      let selection = data.selctionText;
-      console.log(selection)
-
-      
-      // Open the side panel using chrome.sidePanel.open()
-      chrome.sidePanel.open({ tabId: tab.id });
-    }
-  });
->>>>>>> a435c57a79183a78f04c116395a8b32b90cd293f
