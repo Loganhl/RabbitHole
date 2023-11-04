@@ -17,6 +17,7 @@ function setupContextMenu() {
         name: 'define-word',
         data: { value: data.selectionText }
       });
+
       
       // Open the side panel using chrome.sidePanel.open()
       chrome.sidePanel.open({ tabId: tab.id });
