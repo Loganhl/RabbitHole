@@ -18,6 +18,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((data, tab) => {
   if (data.menuItemId === 'factcheck') {
+    // Open the side panel using chrome.sidePanel.open()
+    chrome.sidePanel.open({ tabId: tab.id });
+
     // Capture the selected text
     const selectedText = data.selectionText;
 
@@ -25,18 +28,24 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
     chrome.runtime.sendMessage({
       name: 'factcheck',
       data: selectedText
+      
     });
-
+    
+  
+  } if (data.menuItemId === 'relevant') {
     // Open the side panel using chrome.sidePanel.open()
     chrome.sidePanel.open({ tabId: tab.id });
 
-  } else if (data.menuItemId === 'relevant') {
+    // Capture the selected text
     const selectedText = data.selectionText;
 
+    // Send the selected text to your background script
     chrome.runtime.sendMessage({
       name: 'relevant',
       data: selectedText
+      
     });
 
+    chrome.sidePanel.open({ tabId: tab.id });
   }
 });
