@@ -1,19 +1,18 @@
-import { result } from 'testing.js';
+let query = '';
 
-const words = {
-    extensions:
-      'Extensions are software programs, built on web technologies (such as HTML, CSS, and JavaScript) that enable users to customize the Chrome browsing experience.',
-    popup:
-      "A UI surface which appears when an extension's action icon is clicked."
-  };
-  
-  chrome.runtime.onMessage.addListener(({ name, data }) => {
+chrome.runtime.onMessage.addListener(({ name, data }) => {
     if (name === 'define-word') {
-      // Hide instructions.
-      document.body.querySelector('#select-a-word').style.display = 'none';
-  
-      // Show word and definition.
-      document.body.querySelector('#selection').innerText = data.value;
-      document.body.querySelector('#definition-text').innerText = result;
+        // Hide instructions.
+        document.getElementById('select-a-word').style.display = 'none';
+
+        // Show word.
+        document.getElementById('selection').innerText = data.value;
+
+        // Call the Check function and update the side panel text when the API response is received.
+        Check(data.value).then(resultString => {
+            document.getElementById('definition-text').innerText = resultString;
+        });
+
+        query = data.value;
     }
-  });
+});

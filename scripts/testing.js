@@ -27,15 +27,19 @@ function Check(query) {
                 const website_url = topRating.claimReview[0].url;
                 const rating = topRating.claimReview[0].textualRating;
 
+                let resultString = '';
+
                 if (["True", "False", "Mostly False", "Half True", "Mostly True"].includes(rating)) {
-                    return `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}\nRating: ${rating}`;
+                    resultString =  `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}\nRating: ${rating}`;
                 } else {
-                    return `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}`;
+                    resultString = `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}`;
                 }
+
+                return resultString
             } else {
                 return null;
             }
         });
 }
 
-export { result };
+export { Check };
