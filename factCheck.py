@@ -2,6 +2,8 @@ import json
 import requests
 #import 
 
+
+
 with open('config.json') as config_file:
     config = json.load(config_file)
     api_key = config.get('api_key')
