@@ -1,6 +1,6 @@
 async function Check(query) {
   const url = 'https://factchecktools.googleapis.com/v1alpha1/claims:search';
-  const api_key = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8'; // Replace with your actual API key
+  const api_key = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8'; 
 
   const params = new URLSearchParams({
     key: api_key,
@@ -32,7 +32,7 @@ async function Check(query) {
           resultElement.innerText = `Publisher : ${publisher_name}\n${claim_title}\nRead More : ${website_url}`;
         }
       } catch (error) {
-        document.getElementById('factCheckResult').innerText = "Test";
+        document.getElementById('factCheckResult').innerText = "Fact check not in database!";
       }
     } else {
       document.getElementById('factCheckResult').innerText = "HTTP request failed.";
