@@ -1,3 +1,5 @@
+import { result } from 'testing.js';
+
 const words = {
     extensions:
       'Extensions are software programs, built on web technologies (such as HTML, CSS, and JavaScript) that enable users to customize the Chrome browsing experience.',
@@ -11,8 +13,7 @@ const words = {
       document.body.querySelector('#select-a-word').style.display = 'none';
   
       // Show word and definition.
-      document.body.querySelector('#definition-word').innerText = data.value;
-      document.body.querySelector('#definition-text').innerText =
-        words[data.value.toLowerCase()];
+      document.body.querySelector('#selection').innerText = data.value;
+      document.body.querySelector('#definition-text').innerText = result;
     }
   });

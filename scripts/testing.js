@@ -1,7 +1,7 @@
-const fetch = require('node-fetch'); // For Node.js environment
+import {highlightedText} from 'content.js';
 
 const apiKey = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8'; // Replace with your API key
-const query = 'The sun is a mile away from earth';
+const query = highlightedText
 
 function Check(query) {
     const payload = {
@@ -38,18 +38,4 @@ function Check(query) {
         });
 }
 
-function Test() {
-    Check(query)
-        .then(result => {
-            if (result) {
-                console.log(result);
-            } else {
-                console.log("Fact-checking failed or no claim review found.");
-            }
-        })
-        .catch(error => {
-            console.error("An error occurred:", error);
-        });
-}
-
-Test();
+export { result };
