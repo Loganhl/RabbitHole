@@ -1,19 +1,57 @@
-import { result } from 'testing.js';
 
-const words = {
-    extensions:
-      'Extensions are software programs, built on web technologies (such as HTML, CSS, and JavaScript) that enable users to customize the Chrome browsing experience.',
-    popup:
-      "A UI surface which appears when an extension's action icon is clicked."
-  };
-  
-  chrome.runtime.onMessage.addListener(({ name, data }) => {
+const apiKey = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8'; // Replace with your API key
+
+function Check(query) {
+    const payload = {
+        key: apiKey,
+        query: query
+    };
+
+    const url = 'https://factchecktools.googleapis.com/v1alpha1/claims:search?' + new URLSearchParams(payload).toString();
+
+    return fetch(url)
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                return null;
+            }
+        })
+        .then(data => {
+            if (data) {
+                const topRating = data.claims[0];
+                const publisher_name = topRating.claimReview[0].publisher.name;
+                const claim_title = topRating.claimReview[0].title;
+                const website_url = topRating.claimReview[0].url;
+                const rating = topRating.claimReview[0].textualRating;
+
+                let resultString = '';
+
+                if (["True", "False", "Mostly False", "Half True", "Mostly True"].includes(rating)) {
+                    resultString =  `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}\nRating: ${rating}`;
+                } else {
+                    resultString = `Publisher: ${publisher_name}\n${claim_title}\nRead More: ${website_url}`;
+                }
+
+                return resultString;
+
+            } else {
+                return null;
+            }
+        });
+}
+
+chrome.runtime.onMessage.addListener(({ name, data }) => {
     if (name === 'define-word') {
-      // Hide instructions.
-      document.body.querySelector('#select-a-word').style.display = 'none';
-  
-      // Show word and definition.
-      document.body.querySelector('#selection').innerText = data.value;
-      document.body.querySelector('#definition-text').innerText = result;
+
+        // Show word.
+        document.getElementById('selection').innerText = data.value;
+
+        let query = data.value
+
+        // Call the Check function and update the side panel text when the API response is received.
+        Check(query).then(resultString => {
+            document.getElementById('definition-text').innerText = resultString;
+        });
     }
-  });
+});
