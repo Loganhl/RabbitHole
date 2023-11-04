@@ -23,4 +23,3 @@ function setupContextMenu() {
       chrome.sidePanel.open({ tabId: tab.id });
     }
   });
-  
