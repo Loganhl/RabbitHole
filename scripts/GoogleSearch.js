@@ -1,6 +1,10 @@
 const unirest = require("unirest");
 const cheerio = require("cheerio");
-query = "Easter Ruined By Clint Eastwood"
+let query = "Easter Ruined By Clint Eastwood"
+
+document.addEventListener('DOMContentLoaded', function () {
+  getResults();
+});
 
 
 async function getResults() {
@@ -32,12 +36,10 @@ async function getResults() {
           links[i],
         ];
       }
-  
-      console.log(results[0])
-
+      
+      console.log(results[0]);
+      const resultElement = document.getElementById('results');
+      resultElement.innerText = 'Test';
     });
     
-
 };
-
-getResults();

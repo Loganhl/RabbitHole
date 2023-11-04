@@ -19,7 +19,7 @@ async function Check(query) {
         const website_url = topRating.claimReview[0].url;
         const rating = topRating.claimReview[0].textualRating;
 
-        const resultElement = document.getElementById('factCheckResult');
+        const resultElement = document.getElementById('results');
         if (
           rating === "True" ||
           rating === "False" ||
@@ -32,19 +32,19 @@ async function Check(query) {
           resultElement.innerText = `Publisher : ${publisher_name}\n${claim_title}\nRead More : ${website_url}`;
         }
       } catch (error) {
-        document.getElementById('factCheckResult').innerText = "Fact check not in database!";
+        document.getElementById('results').innerText = "Fact check not in database!";
       }
     } else {
-      document.getElementById('factCheckResult').innerText = "HTTP request failed.";
+      document.getElementById('results').innerText = "HTTP request failed.";
     }
   } catch (error) {
-    document.getElementById('factCheckResult').innerText = "Error fetching data.";
+    document.getElementById('results').innerText = "Error fetching data.";
   }
 }
 
 // Listen for selected text from content.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.name === 'selected-text') {
+  if (message.name === 'factcheck') {
     const selectedText = message.data;
     Check(selectedText);
   }
