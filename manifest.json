@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "RabbitHole",
+    "description": "",
+    "version": "1.0",
+    "icons": {
+        "16": "",
+        "32": "",
+        "48": "",
+        "128": ""
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js"
+            ]
+        }
+    ],
+    "side_panel": {
+        "default_path": "scripts/sidepanel.html"
+    }
+}
