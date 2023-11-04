@@ -1,9 +1,10 @@
 const unirest = require("unirest");
 const cheerio = require("cheerio");
+query = "Easter Ruined By Clint Eastwood"
 
-const getOrganicData = () => {
+const getResults = () => {
   return unirest
-    .get("https://www.google.com/search?q=${}")
+    .get('https://www.google.com/search?q='+ query)
     .headers({
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -22,16 +23,16 @@ const getOrganicData = () => {
         links[i] = $(el).attr("href");
       });
 
-      const organicResults = [];
+      const results = [];
 
       for (let i = 0; i < titles.length; i++) {
-        organicResults[i] = {
+        results[i] = {
           title: titles[i],
           links: links[i],
         };
       }
-      console.log(organicResults[0])
+      console.log(results[0])
     });
 };
 
-getOrganicData();
+getResults();
