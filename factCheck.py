@@ -25,6 +25,7 @@ def Check(query):
             claim_title = topRating["claimReview"][0]['title']
             website_url = topRating["claimReview"][0]['url']
             rating = topRating["claimReview"][0]['textualRating']
+            print(type())
             if rating == "True" or "False" or "Mostly False" or "Half True" or "Mostly True":
                 result = f"Publisher : {publisher_name} \n{claim_title} \nRead More : {website_url} \nRating : {rating}"
                 return result 
