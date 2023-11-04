@@ -10,7 +10,7 @@ headers_list = list()
 link_list = list()
 relevant_articles = list()
 
-search = "cats"
+search = "Scream"
 
 #holds the request information from the query in a binary format
 response = requests.get("https://www.google.com/search?q="+ search +"&tbm=nws")
@@ -20,10 +20,8 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 
                             "html.parser") 
 
-
     #get all headers(article titles)
     heading_object=soup.find_all( 'h3' )
-
 
     #parse headers and urls into seperate lists
     for info in heading_object: 
@@ -36,7 +34,9 @@ if response.status_code == 200:
     link_list = link_list[16:-7]
     
     #zip header_list elements and link_lsit
-    relevant_articles.extend([list(a) for a in zip(headers_list,link_list)]) 
+    if len(headers_list) == len(link_list):
+        relevant_articles.extend([list(a) for a in zip(headers_list,link_list)]) 
+        
         
     for pair in relevant_articles:
         print(pair,"\n\n")
