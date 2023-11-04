@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 async function scrapeGoogleNews(query) {
-  const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&tbm=nws"`;
 
   try {
     const response = await axios.get(searchUrl);
@@ -12,7 +12,7 @@ async function scrapeGoogleNews(query) {
 
     $('h3').each((index, element) => {
       const title = $(element).text();
-      const url = $(element).parent().attr('href');
+      const url = $(element).parent().find('a').attr('href');
       results.push({ title, url });
     });
 
@@ -23,7 +23,7 @@ async function scrapeGoogleNews(query) {
   }
 }
 
-const searchQuery = 'Your search query here';
+const searchQuery = 'Dog Attack Wisonsin';
 scrapeGoogleNews(searchQuery)
   .then((results) => {
     console.log('Search Results:');

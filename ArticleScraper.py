@@ -10,7 +10,7 @@ headers_list = list()
 link_list = list()
 relevant_articles = list()
 
-search = "Scream"
+search = "Dog Attack Wisonsin"
 
 #holds the request information from the query in a binary format
 response = requests.get("https://www.google.com/search?q="+ search +"&tbm=nws")
