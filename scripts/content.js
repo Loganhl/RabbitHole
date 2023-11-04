@@ -38,6 +38,5 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
       data: selectedText
     });
 
-    chrome.sidePanel.open({ tabId: tab.id });
   }
 });
