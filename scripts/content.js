@@ -46,6 +46,6 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
       
     });
 
-    chrome.sidePanel.open({ tabId: tab.id });
+    
   }
 });

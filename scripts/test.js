@@ -20,6 +20,11 @@ async function Check(query) {
         const rating = topRating.claimReview[0].textualRating;
 
         const resultElement = document.getElementById('results');
+
+        while (resultElement.firstChild) {
+          resultElement.removeChild(resultElement.firstChild);
+        }
+
         if (
           rating === "True" ||
           rating === "False" ||
@@ -27,9 +32,29 @@ async function Check(query) {
           rating === "Half True" ||
           rating === "Mostly True"
         ) {
-          resultElement.innerText = `Publisher : ${publisher_name}\nRating : ${rating}\n${claim_title}\nRead More : ${website_url}\n`;
+          const ratingElement = document.createElement('div');
+          ratingElement.innerHTML = `<h3>${rating} according to ${publisher_name}</h3>`;
+          resultElement.appendChild(ratingElement);
+
+          const titleElement = document.createElement('div');
+          titleElement.innerText = `${claim_title}`;
+          resultElement.appendChild(titleElement);
+
+          const urlElement = document.createElement('div');
+          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a>`;
+          resultElement.appendChild(urlElement);
         } else {
-          resultElement.innerText = `Publisher : ${publisher_name}\n${claim_title}\nRead More : ${website_url}`;
+          const publisherElement = document.createElement('div');
+          publisherElement.innerHTML = `<h3>Publisher: ${publisher_name}</h3>`;
+          resultElement.appendChild(publisherElement);
+
+          const titleElement = document.createElement('div');
+          titleElement.innerText = `${claim_title}`;
+          resultElement.appendChild(titleElement);
+
+          const urlElement = document.createElement('div');
+          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a>`;
+          resultElement.appendChild(urlElement);
         }
       } catch (error) {
         document.getElementById('results').innerText = "Fact check not in database!";
