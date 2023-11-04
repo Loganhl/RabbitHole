@@ -1,8 +1,6 @@
 var unirest = require('unirest'); // Remove this line
 var cheerio = require('cheerio'); // Remove this line
 
-let query = "Easter Ruined By Clint Eastwood";
-
 async function getResults(query) {
   // You don't need 'require' for browser-based HTTP requests
   const response = await fetch('https://www.google.com/search?q=' + query, {
@@ -67,18 +65,20 @@ function updateResults(results) {
   }
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.name === 'relevant') {
-    
-    getResults(query)
-      .then(results => {
-        updateResults(results);
-      })
-      .catch(error => {
-          console.error(error);
-      });
 
+
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message.name === 'relevant') {
     const selectedText = message.data;
-    updateResults(results);
+
+    // Define the query based on the selected text
+    const query = selectedText;
+
+    try {
+      const results = await getResults(query);
+      updateResults(results);
+    } catch (error) {
+      console.error(error);
+    }
   }
 });

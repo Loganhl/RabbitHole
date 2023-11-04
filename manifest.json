@@ -18,5 +18,12 @@
         "default_path": "scripts/sidepanel.html"
     },
 
-    "permissions": ["sidePanel", "contextMenus"]
+    "permissions": ["sidePanel", "contextMenus"],
+
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["scripts/content.js"]
+        }
+    ]
 }
