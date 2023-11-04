@@ -4,7 +4,8 @@
 const request = require('request');
 
 const apiKey = ' AIzaSyD_uJuL89BVGxL6PbjKiinNcJ-hVOPMe_Q '; 
-const cx = 'YOUR_CUSTOM_SEARCH_ENGINE_ID'; // Replace with your actual Custom Search Engine ID
+const cx = '637fdff69b5684ae2'; 
+
 const query = 'Easter Ruined By Clint Eastwood'; // Replace with your search query
 
 const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${query}`;
