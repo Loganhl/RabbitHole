@@ -20,6 +20,12 @@ h1 {
     width: auto, fit-content;
 }
 
+.instruction {
+    font-family: "DejaVu Sans Mono", monospace;
+    text-align: center;
+    padding-top: 10px;
+    opacity: 80%;
+}
 .bubble {
     background-color: rgb(49, 50, 55);
     color: white;
