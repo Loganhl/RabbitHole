@@ -26,6 +26,5 @@ Select "Load Unpacked" in the upper-left hand corner. Click into your unzipped f
 
 ![Unpack Extension](https://cdn.discordapp.com/attachments/1170156678189158410/1170663445239169095/Screenshot_4.png?ex=6559dc4b&is=6547674b&hm=4571f69c5e9771a89cfc748c7fdafe2948227f9dc46a91c94bd5a4739259a9f0&)
 
-#### Enjoy!
 You can now access the extension from your toolbar!
 ------------------------------------------------------------------------------------
