@@ -15,7 +15,7 @@ async function getResults(query) {
     const links = doc.querySelectorAll('.tF2Cxc a');
     const titles = doc.querySelectorAll('h3');
 
-    for (let i = 0; i < Math.min(links.length, titles.length, 5); i++) {
+    for (let i = 0; i < Math.min(links.length, titles.length, 6); i++) {
       const title = titles[i].textContent;
       const link = links[i].getAttribute('href');
       results.push([title, link]);
@@ -35,10 +35,10 @@ function updateResults(results) {
     resultsContainer.appendChild(noResultsElement);
   } else {
     const titleElement = document.createElement('div');
-    titleElement.innerHTML = `<h3>Top 5 Relevant Articles:</h3>`;
+    titleElement.innerHTML = `<h3>Top 5 Relevant Articles</h3>`;
     resultsContainer.appendChild(titleElement);
 
-    for (let i = 0; i < results.length; i++) {
+    for (let i = 1; i < results.length; i++) {
       const [title, link] = results[i];
 
       const linkElement = document.createElement('div');
