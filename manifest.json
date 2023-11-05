@@ -2,7 +2,7 @@
     "name": "RabbitHole",
     "version": "1.0",
     "manifest_version": 3,
-    "description": "",
+    "description": "Fact-check, article search, and dive deeper into the media presented before you.",
     "background": {
         "service_worker": "scripts/content.js"
     },
