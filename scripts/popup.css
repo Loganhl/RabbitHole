@@ -1,0 +1,51 @@
+
+body {
+    width: 250px;
+    height: 300px;
+    padding: 10px;
+    font-family: "DejaVu Sans Mono", monospace;
+    background-color: rgb(49, 50, 55);
+
+  }
+  
+  .popup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .top-border {
+    width: 100%;
+    height: 4px;
+    background-color: rgb(196, 123, 28); 
+  }
+  
+  p {
+    text-align: center;
+    color: white;
+    padding-bottom: 30px;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto; 
+  }
+  
+  img {
+    width: 128px;
+    height: 128px;
+    padding-bottom: 40px;
+  }
+  
+  .descripton {
+    font-family: "DejaVu Sans Mono", monospace;
+    color: rgb(216, 213, 213);
+    font-size: small;
+    text-align: center;
+  }
+
+  .last-words {
+    color: rgb(193, 111, 70);
+    font-weight: 700;
+}

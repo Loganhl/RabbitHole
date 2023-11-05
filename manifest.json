@@ -25,5 +25,13 @@
             "matches": ["<all_urls>"],
             "js": ["scripts/content.js"]
         }
-    ]
+    ],
+
+    
+   
+    "action": {
+        "default_popup": "/scripts/popup.html"
+        }
+        
+    
 }
