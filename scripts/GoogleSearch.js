@@ -14,7 +14,7 @@ async function getResults(query) {
 
     const searchResults = doc.querySelectorAll('.g');
 
-    for (let i = 0; i < Math.min(searchResults.length, 6); i++) {
+    for (let i = 0; i < Math.min(searchResults.length, 5); i++) {
       const titleElement = searchResults[i].querySelector('h3');
       const linkElement = searchResults[i].querySelector('a');
 
