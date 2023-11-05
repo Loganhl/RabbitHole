@@ -12,57 +12,48 @@ async function getResults(query) {
 
     const results = [];
 
-    const links = doc.querySelectorAll('.tF2Cxc a');
-    const titles = doc.querySelectorAll('h3');
+    const searchResults = doc.querySelectorAll('.g');
 
-    for (let i = 0; i < Math.min(links.length, titles.length, 6); i++) {
-      const title = titles[i].textContent;
-      const link = links[i].getAttribute('href');
-      results.push([title, link]);
+    for (let i = 0; i < Math.min(searchResults.length, 6); i++) {
+      const titleElement = searchResults[i].querySelector('h3');
+      const linkElement = searchResults[i].querySelector('a');
+
+      if (titleElement && linkElement) {
+        const title = titleElement.textContent;
+        const link = linkElement.href;
+
+        if (!title.includes('Description')) {
+          results.push([title, link]);
+        }
+      }
     }
 
     return results;
   }
 }
 
-function updateResults(results) {
+function updateResultsInHTML(results) {
   const resultsContainer = document.getElementById('results');
 
-  // Check if the results array is empty
-  if (results.length === 0) {
-    const noResultsElement = document.createElement('div');
-    noResultsElement.innerHTML = `<h3>No related articles!</h3><p>There were no relevant articles found from your selection.</p><hr>`;
-    resultsContainer.appendChild(noResultsElement);
-  } else {
-    const titleElement = document.createElement('div');
-    titleElement.innerHTML = `<h3>Top 5 Relevant Articles</h3>`;
-    resultsContainer.appendChild(titleElement);
+ 
+  resultsContainer.innerHTML = '';
 
-    for (let i = 1; i < results.length; i++) {
-      const [title, link] = results[i];
+  results.forEach(result => {
+    const resultElement = document.createElement('a');
+    resultElement.textContent = result[0];
+    resultElement.href = result[1];
+    resultElement.target = '_blank';
+    resultsContainer.appendChild(resultElement);
 
-      const titleElement = document.createElement('p');
-      titleElement.innerText = `${i}: ${title}`
-      resultsContainer.appendChild(titleElement);
-
-      const linkElement = document.createElement('div');
-      linkElement.innerHTML = `<a href="${link}" style="color:white;" target="_blank"> - Click here! - </a>`;
-      resultsContainer.appendChild(linkElement);
-
-    }
-  
-
-    const divider = document.createElement('hr');
-    resultsContainer.appendChild(divider);
-  }
+    resultsContainer.appendChild(document.createElement('br'));
+  });
 }
-
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.name === 'relevant') {
     const selectedText = message.data;
     getResults(selectedText).then(results => {
-      updateResults(results);
+      updateResultsInHTML(results);
     });
   }
 });
