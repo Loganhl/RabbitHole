@@ -1,3 +1,5 @@
+// factChecker.js
+
 async function Check(query) {
   const url = 'https://factchecktools.googleapis.com/v1alpha1/claims:search';
   const api_key = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8';
@@ -12,6 +14,7 @@ async function Check(query) {
     if (response.status === 200) {
       const result = await response.json();
       const resultElement = document.getElementById('results');
+      const listElement = document.createElement('div'); // Define resultElement here
 
       if (result.claims && result.claims.length > 0) {
         const topRating = result.claims[0];
@@ -19,6 +22,7 @@ async function Check(query) {
         const claim_title = topRating.claimReview[0].title;
         const website_url = topRating.claimReview[0].url;
         const rating = topRating.claimReview[0].textualRating;
+        
 
         if (
           rating === "True" ||
@@ -27,46 +31,41 @@ async function Check(query) {
           rating === "Half True" ||
           rating === "Mostly True"
         ) {
-          const ratingElement = document.createElement('div');
-          ratingElement.innerHTML = `<h3>${rating} according to ${publisher_name}</h3>`;
-          resultElement.appendChild(ratingElement);
-
-          const titleElement = document.createElement('div');
-          titleElement.innerText = `${claim_title}`;
-          resultElement.appendChild(titleElement);
-
-          const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
-          resultElement.appendChild(urlElement);
-
-
+          const ratingElement = document.createElement('h3');
+          ratingElement.innerText = `${rating} according to ${publisher_name}`;
+          listElement.appendChild(ratingElement);
         } else {
           const publisherElement = document.createElement('div');
           publisherElement.innerHTML = `<h3>Publisher: ${publisher_name}</h3>`;
-          resultElement.appendChild(publisherElement);
-
-          const titleElement = document.createElement('div');
-          titleElement.innerText = `${claim_title}`;
-          resultElement.appendChild(titleElement);
-
-          const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
-          resultElement.appendChild(urlElement);
+          listElement.appendChild(publisherElement);
         }
+
+        const titleElement = document.createElement('div');
+        titleElement.innerText = `${claim_title}`;
+        listElement.appendChild(titleElement);
+
+        const urlElement = document.createElement('div');
+        urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
+        listElement.appendChild(urlElement);
+
+        resultElement.insertBefore(listElement, resultElement.firstChild);
       } else {
         const notInDatabaseElement = document.createElement('div');
-        notInDatabaseElement.innerHTML = `<h3>Fact check not in database!</h3><p>This claim has not been factchecked by Google FactCheckAPI.</p><hr></hr>`;
-        resultElement.appendChild(notInDatabaseElement);
+        notInDatabaseElement.innerHTML = `<h3>Fact check not in database!</h3><p>This claim has not been fact-checked by Google FactCheckAPI.</p><hr></hr>`;
+        listElement.appendChild(notInDatabaseElement);
+        resultElement.insertBefore(listElement, resultElement.firstChild);
       }
     } else {
       const notInDatabaseElement = document.createElement('div');
       notInDatabaseElement.innerHTML = `<h3>HTTP Error!</h3><hr></hr>`;
-      resultElement.appendChild(notInDatabaseElement);
+      listElement.appendChild(notInDatabaseElement);
+      resultElement.insertBefore(listElement, resultElement.firstChild);
     }
   } catch (error) {
     const notInDatabaseElement = document.createElement('div');
     notInDatabaseElement.innerHTML = `<h3>Error Fetching Data!</h3><hr></hr>`;
-    resultElement.appendChild(notInDatabaseElement);
+    listElement.appendChild(notInDatabaseElement);
+    resultElement.insertBefore(listElement, resultElement.firstChild);
   }
 }
 
