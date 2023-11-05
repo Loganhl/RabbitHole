@@ -28,8 +28,6 @@ async function getResults(query) {
 function updateResults(results) {
   const resultsContainer = document.getElementById('results');
 
-  resultsContainer.innerHTML = '';
-
   for (let i = 0; i < results.length; i++) {
     const [title, link] = results[i];
 
