@@ -29,37 +29,45 @@ async function getResults(query) {
     }
 
     return results;
+  } else {
+    // Handle the case when the response is not OK (e.g., no results)
+    return [];
   }
 }
 
 function updateResultsInHTML(results) {
   const resultElement = document.getElementById('results');
-  const listElement = document.createElement('div');
+  
+  if (results.length === 0) {
+    const noresults = document.createElement('div')
+    noresults.innerHTML = `<h3>No Results Found</h3><p>There were no relevant articles found for this selection</p><hr>`;
+    resultElement.insertBefore(noresults, resultElement.firstChild);
+  } else {
+    const listElement = document.createElement('div');
 
-  const titleElement = document.createElement('h3');
-  titleElement.innerText = 'Top 5 Relevant Articles';
-  listElement.appendChild(titleElement);
+    const titleElement = document.createElement('h3');
+    titleElement.innerText = 'Top 5 Relevant Articles';
+    listElement.appendChild(titleElement);
 
-  results.forEach(result => {
-    const linkElement = document.createElement('a');
-    linkElement.textContent = result[0];
-    linkElement.href = result[1];
-    linkElement.target = '_blank';
-    linkElement.style.color = 'white';
+    results.forEach(result => {
+      const linkElement = document.createElement('a');
+      linkElement.textContent = result[0];
+      linkElement.href = result[1];
+      linkElement.target = '_blank';
+      linkElement.style.color = 'white';
 
-    const linkDiv = document.createElement('div');
-    linkDiv.style.marginBottom = '10px';
-    linkDiv.appendChild(linkElement);
-    listElement.appendChild(linkDiv);
-  });
+      const linkDiv = document.createElement('div');
+      linkDiv.style.marginBottom = '10px';
+      linkDiv.appendChild(linkElement);
+      listElement.appendChild(linkDiv);
+    });
 
-  const hrElement = document.createElement('hr');
-  listElement.appendChild(hrElement);
+    const hrElement = document.createElement('hr');
+    listElement.appendChild(hrElement);
 
-  resultElement.insertBefore(listElement, resultElement.firstChild);
+    resultElement.insertBefore(listElement, resultElement.firstChild);
+  }
 }
-
-
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.name === 'relevant') {
