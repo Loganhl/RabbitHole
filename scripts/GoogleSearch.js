@@ -41,14 +41,14 @@ function updateResults(results) {
     for (let i = 1; i < results.length; i++) {
       const [title, link] = results[i];
 
+      const titleElement = document.createElement('h4');
+      titleElement.innerText = `${i}: ${title}`
+      resultsContainer.appendChild(titleElement);
+
       const linkElement = document.createElement('div');
-      linkElement.innerHTML = `<a href="${link}" style="color:white;" target="_blank">${title}</a>`;
+      linkElement.innerHTML = `<a href="${link}" style="color:white;" target="_blank"> -- Click here! -- </a>`;
       resultsContainer.appendChild(linkElement);
 
-      if (i < results.length - 1) {
-        const divider = document.createElement('br');
-        resultsContainer.appendChild(divider);
-      }
     }
   
 
