@@ -36,7 +36,7 @@ async function Check(query) {
           resultElement.appendChild(titleElement);
 
           const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a><hr></hr>`;
+          urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
           resultElement.appendChild(urlElement);
         } else {
           const publisherElement = document.createElement('div');
@@ -48,7 +48,7 @@ async function Check(query) {
           resultElement.appendChild(titleElement);
 
           const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a><hr></hr>`;
+          urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
           resultElement.appendChild(urlElement);
         }
       } else {
