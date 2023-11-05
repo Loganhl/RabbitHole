@@ -16,10 +16,10 @@ chrome.runtime.onInstalled.addListener(() => {
   setupContextMenu();
 });
 
-chrome.contextMenus.onClicked.addListener((data, tab) => {
+chrome.contextMenus.onClicked.addListener(async(data, tab) => {
   if (data.menuItemId === 'factcheck') {
     // Open the side panel using chrome.sidePanel.open()
-    chrome.sidePanel.open({ tabId: tab.id });
+    
 
     // Capture the selected text
     const selectedText = data.selectionText;
@@ -30,6 +30,10 @@ chrome.contextMenus.onClicked.addListener((data, tab) => {
       data: selectedText
       
     });
+
+    
+    await chrome.sidePanel.open({ tabId: tab.id });
+    
     
   
   } if (data.menuItemId === 'relevant') {

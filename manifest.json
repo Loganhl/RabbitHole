@@ -18,7 +18,7 @@
         "default_path": "scripts/sidepanel.html"
     },
 
-    "permissions": ["sidePanel", "contextMenus", "https://www.googleapis.com/"],
+    "permissions": ["activeTab", "storage", "sidePanel", "contextMenus", "https://www.googleapis.com/"],
 
     "content_scripts": [
         {

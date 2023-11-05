@@ -38,6 +38,8 @@ async function Check(query) {
           const urlElement = document.createElement('div');
           urlElement.innerHTML = `<br><a href="${website_url}" style="color:white;" target="_blank">Read More</a><hr></hr>`;
           resultElement.appendChild(urlElement);
+
+
         } else {
           const publisherElement = document.createElement('div');
           publisherElement.innerHTML = `<h3>Publisher: ${publisher_name}</h3>`;
