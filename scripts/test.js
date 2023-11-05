@@ -1,6 +1,6 @@
 async function Check(query) {
   const url = 'https://factchecktools.googleapis.com/v1alpha1/claims:search';
-  const api_key = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8'; 
+  const api_key = 'AIzaSyBzZL4Pxp-P1TKURLOtTSBR7JLyefXQQX8';
 
   const params = new URLSearchParams({
     key: api_key,
@@ -11,19 +11,14 @@ async function Check(query) {
     const response = await fetch(`${url}?${params.toString()}`);
     if (response.status === 200) {
       const result = await response.json();
+      const resultElement = document.getElementById('results');
 
-      try {
+      if (result.claims && result.claims.length > 0) {
         const topRating = result.claims[0];
         const publisher_name = topRating.claimReview[0].publisher.name;
         const claim_title = topRating.claimReview[0].title;
         const website_url = topRating.claimReview[0].url;
         const rating = topRating.claimReview[0].textualRating;
-
-        const resultElement = document.getElementById('results');
-
-        while (resultElement.firstChild) {
-          resultElement.removeChild(resultElement.firstChild);
-        }
 
         if (
           rating === "True" ||
@@ -41,7 +36,7 @@ async function Check(query) {
           resultElement.appendChild(titleElement);
 
           const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a>`;
+          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a><hr></hr>`;
           resultElement.appendChild(urlElement);
         } else {
           const publisherElement = document.createElement('div');
@@ -53,17 +48,23 @@ async function Check(query) {
           resultElement.appendChild(titleElement);
 
           const urlElement = document.createElement('div');
-          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a>`;
+          urlElement.innerHTML = `<br><a href="${website_url}" target="_blank">Read More</a><hr></hr>`;
           resultElement.appendChild(urlElement);
         }
-      } catch (error) {
-        document.getElementById('results').innerText = "Fact check not in database!";
+      } else {
+        const notInDatabaseElement = document.createElement('div');
+        notInDatabaseElement.innerHTML = `<h3>Fact check not in database!</h3><hr></hr>`;
+        resultElement.appendChild(notInDatabaseElement);
       }
     } else {
-      document.getElementById('results').innerText = "HTTP request failed.";
+      const notInDatabaseElement = document.createElement('div');
+      notInDatabaseElement.innerHTML = `<h3>HTTP Error!</h3><hr></hr>`;
+      resultElement.appendChild(notInDatabaseElement);
     }
   } catch (error) {
-    document.getElementById('results').innerText = "Error fetching data.";
+    const notInDatabaseElement = document.createElement('div');
+    notInDatabaseElement.innerHTML = `<h3>Error Fetching Data!</h3><hr></hr>`;
+    resultElement.appendChild(notInDatabaseElement);
   }
 }
 
