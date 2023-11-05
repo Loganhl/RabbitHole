@@ -28,23 +28,35 @@ async function getResults(query) {
 function updateResults(results) {
   const resultsContainer = document.getElementById('results');
 
-  for (let i = 0; i < results.length; i++) {
-    const [title, link] = results[i];
+  // Check if the results array is empty
+  if (results.length === 0) {
+    const noResultsElement = document.createElement('div');
+    noResultsElement.innerHTML = `<h3>No related articles!</h3><p>There were no relevant articles found from your selection.</p><hr>`;
+    resultsContainer.appendChild(noResultsElement);
+  } else {
+    const titleElement = document.createElement('div');
+    titleElement.innerHTML = `<h3>Top 5 Relevant Articles:</h3>`;
+    resultsContainer.appendChild(titleElement);
 
-    const resultElement = document.createElement('div');
-    resultElement.classList.add('result');
+    for (let i = 0; i < results.length; i++) {
+      const [title, link] = results[i];
 
-    const titleElement = document.createElement('h3');
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', link);
-    linkElement.textContent = title;
+      const linkElement = document.createElement('div');
+      linkElement.innerHTML = `<a href="${link}" style="color:white;" target="_blank">${title}</a>`;
+      resultsContainer.appendChild(linkElement);
 
-    titleElement.appendChild(linkElement);
-    resultElement.appendChild(titleElement);
+      if (i < results.length - 1) {
+        const divider = document.createElement('br');
+        resultsContainer.appendChild(divider);
+      }
+    }
+  
 
-    resultsContainer.appendChild(resultElement);
+    const divider = document.createElement('hr');
+    resultsContainer.appendChild(divider);
   }
 }
+
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.name === 'relevant') {

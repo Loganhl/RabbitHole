@@ -53,7 +53,7 @@ async function Check(query) {
         }
       } else {
         const notInDatabaseElement = document.createElement('div');
-        notInDatabaseElement.innerHTML = `<h3>Fact check not in database!</h3><p>This claim has not been factchecked by Google FachtCheckAPI.</p><hr></hr>`;
+        notInDatabaseElement.innerHTML = `<h3>Fact check not in database!</h3><p>This claim has not been factchecked by Google FactCheckAPI.</p><hr></hr>`;
         resultElement.appendChild(notInDatabaseElement);
       }
     } else {
