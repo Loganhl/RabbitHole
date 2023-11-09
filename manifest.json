@@ -18,11 +18,10 @@
         "default_path": "scripts/sidepanel.html"
     },
 
-    "permissions": ["activeTab", "storage", "sidePanel", "contextMenus", "https://www.googleapis.com/"],
+    "permissions": ["activeTab", "sidePanel", "contextMenus", "https://www.googleapis.com/"],
 
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
             "js": ["scripts/content.js"]
         }
     ],
