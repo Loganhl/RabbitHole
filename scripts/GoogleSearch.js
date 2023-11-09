@@ -46,7 +46,7 @@ function updateResultsInHTML(results) {
     const listElement = document.createElement('div');
 
     const titleElement = document.createElement('h3');
-    titleElement.innerText = 'Top 5 Relevant Articles';
+    titleElement.innerText = 'Top Relevant Articles';
     listElement.appendChild(titleElement);
 
     results.forEach(result => {
